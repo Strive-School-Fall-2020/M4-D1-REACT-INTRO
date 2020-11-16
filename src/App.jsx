@@ -1,50 +1,41 @@
 import React from 'react'
+import logo from './logo.svg';
 import './App.css';
-
-import ChildComponent from './ChildComponent'
-
-// onclick
-// onClick
-
-// every component can have props
-// every component can have a state
-
-// a react component can be declared in TWO ways: as a FUNCTION or as a CLASS
-// only CLASS components can have a state
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload, Stefano!
-//         </p>
-//         <ChildComponent strivers='element' counter={0} />
-//         <ChildComponent strivers='component' />
-//       </header>
-//     </div>
-//   );
-// }
+import { NewComponent } from './NewComponent'
 
 class App extends React.Component {
 
+
   state = {
-    counter: 0
+    color: 'red'
+  }
+
+  changeColor = () => {
+    this.setState({
+      color: this.state.color === 'red' ? 'green' : 'red'
+    })
   }
 
   render() {
+    console.log(this.props.myProp)
     return (
       <div className="App">
         <header className="App-header">
-          <button onClick={() => this.setState({ counter: this.state.counter + 1 })}>
-            INCREMENT COUNTER
-          </button>
-          <p>
-            Edit <code>src/App.js</code> and save to reload, Stefano!
+          <NewComponent count={0} color={this.state.color} />
+          <NewComponent count={1} />
+          <NewComponent count={2} />
+          <button onClick={this.changeColor}>CHANGE COLOR</button>
+          <p style={{ color: this.state.color }}>
+            Edit <code>src/App.js</code> and save to reload.
         </p>
-          <ChildComponent strivers='element' counter={this.state.counter} />
-          <ChildComponent strivers='component' />
+          <a
+            className="App-link"
+            href="https://reactjs.org"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Learn React
+        </a>
         </header>
       </div>
     );
